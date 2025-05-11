@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @layer base {
     #root {
@@ -12,6 +13,8 @@
         @apply bg-transparent;
         @apply font-mono antialiased text-white;
         @apply overflow-hidden;
+
+        scrollbar-color: #555 transparent;
     }
 
     header {
