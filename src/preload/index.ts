@@ -6,7 +6,7 @@ if (!process.contextId) {
 
 try {
   contextBridge.exposeInMainWorld('context', {
-    //TODO
+    locale: navigator.language,
   })
 } catch (error) {
   console.error('Failed to expose contextBridge:', error)
