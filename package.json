@@ -25,6 +25,7 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^4.0.0",
     "@mdxeditor/editor": "^3.32.2",
+    "fs-extra": "^11.3.0",
     "jotai": "^2.12.4"
   },
   "devDependencies": {
@@ -46,6 +47,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "lodash": "^4.17.21",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
