@@ -13,7 +13,16 @@ export default defineConfig({
     }
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    //preloadのファイルが読み込めなかったため、cjsに変更
+    build: {
+      rollupOptions: {
+        output: {
+          format: 'cjs', // CommonJSフォーマットを使用
+          entryFileNames: '[name].js' // .js拡張子を明示的に指定
+        }
+      }
+    }
   },
   renderer: {
     assetsInclude: 'src/renderer/assets/**',
