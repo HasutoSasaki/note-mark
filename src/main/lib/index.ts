@@ -1,8 +1,9 @@
-import { ensureDir, readdir, readFile, stat } from "fs-extra"
+import pkg from "fs-extra"
 import { homedir } from "os"
 import { appDirectoryName, fileEncoding } from "../../shared/constants"
 import { NoteInfo } from "../../shared/models"
 import { GetNotes, ReadNote } from "../../shared/types"
+const { ensureDir, readdir, readFile, stat } = pkg
 
 export const getRootDir = () => {
     return `${homedir()}/${appDirectoryName}`
