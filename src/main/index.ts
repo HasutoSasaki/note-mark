@@ -62,7 +62,7 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.handle('getNotes', (_, ...args: Parameters<GetNotes>) => getNotes())
+  ipcMain.handle('getNotes', (_, ...args: Parameters<GetNotes>) => getNotes(...args))
 
   createWindow()
 
