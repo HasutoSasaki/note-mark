@@ -1,8 +1,10 @@
 import { dialog } from "electron"
 import pkg, { remove } from "fs-extra"
+import { isEmpty } from "lodash"
 import { homedir } from "os"
 import path from "path"
-import { appDirectoryName, fileEncoding } from "../../shared/constants"
+import welcomeNoteFile from "../../../resources/welcomeNote.md?asset"
+import { appDirectoryName, fileEncoding, welcomeNoteFilename } from "../../shared/constants"
 import { NoteInfo } from "../../shared/models"
 import { CreateNote, DeleteNote, GetNotes, ReadNote, WriteNote } from "../../shared/types"
 const { ensureDir, readdir, readFile, stat, writeFile } = pkg
@@ -22,6 +24,21 @@ export const getNotes: GetNotes = async () => {
     })
 
     const notes = notesFileNames.filter((fileName) => fileName.name.endsWith(".md"))
+
+    if (isEmpty(notes)) {
+        console.info('No notes found, creating a welcome note')
+
+        const content = await readFile(welcomeNoteFile, { encoding: fileEncoding })
+
+        //create the welcome note
+        await writeFile(`${rootDir}/${welcomeNoteFilename}`, content, { encoding: fileEncoding })
+
+        // Create a Dirent-like object for the welcome note
+        const welcomeNoteDirent = {
+            name: welcomeNoteFilename
+        } as unknown as pkg.Dirent
+        notes.push(welcomeNoteDirent);
+    }
 
     return Promise.all(notes.map((dirent) => getNoteInfoFromFileName(dirent.name)))
 }
