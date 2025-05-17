@@ -2,8 +2,8 @@ import pkg from "fs-extra"
 import { homedir } from "os"
 import { appDirectoryName, fileEncoding } from "../../shared/constants"
 import { NoteInfo } from "../../shared/models"
-import { GetNotes, ReadNote } from "../../shared/types"
-const { ensureDir, readdir, readFile, stat } = pkg
+import { GetNotes, ReadNote, WriteNote } from "../../shared/types"
+const { ensureDir, readdir, readFile, stat, writeFile } = pkg
 
 export const getRootDir = () => {
     return `${homedir()}/${appDirectoryName}`
@@ -38,4 +38,11 @@ export const readNote: ReadNote = async (filename) => {
     const rootDir = getRootDir()
 
     return readFile(`${rootDir}/${filename}.md`, { encoding: fileEncoding })
+}
+
+export const writeNote: WriteNote = async (filename, content) => {
+    const rootDir = getRootDir()
+
+    console.info(`Writing note ${filename}.md`)
+    return writeFile(`${rootDir}/${filename}.md`, content, { encoding: fileEncoding })
 }
