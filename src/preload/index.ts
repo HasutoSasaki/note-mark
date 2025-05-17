@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { GetNotes, ReadNote, WriteNote } from '../shared/types'
+import { CreateNote, GetNotes, ReadNote, WriteNote } from '../shared/types'
 
 if (!process.contextId) {
   throw new Error('contextIsolation must be enabled in ')
@@ -11,6 +11,7 @@ try {
     getNotes: (...args: Parameters<GetNotes>) => ipcRenderer.invoke('getNotes', ...args),
     readNote: (...args: Parameters<ReadNote>) => ipcRenderer.invoke('readNote', ...args),
     writeNote: (...args: Parameters<WriteNote>) => ipcRenderer.invoke('writeNote', ...args),
+    createNote: (...args: Parameters<CreateNote>) => ipcRenderer.invoke('createNote', ...args),
   })
 } catch (error) {
   console.error('Failed to expose contextBridge:', error)
